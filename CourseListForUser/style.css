@@ -1,0 +1,47 @@
+
+.course-items {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+.course-img {
+    width: 150px;
+    height: 150px;
+    max-width: 150px;
+}
+.course-text {
+    margin-left: 20px;
+
+}
+.course-text__title {
+    font-size: 16px;
+    font-weight: 500;
+}
+.course-text__desc, 
+.course-text__author, 
+.course-text__lession,
+.course-text__featured
+{
+    font-size: 14px;   
+    margin-bottom: 5px;                                                                                                                                        
+}
+.course-text__author {
+    font-weight: 500;
+}
+.course-text__lession {
+    opacity: 0.7;
+}
+.course-text__featured {
+    background-color: #141414;
+    color: #fff;
+    border-radius: 50px;
+    width: 80px;
+    text-align: center;
+}
+.course-text__price {
+    font-size: 16px;
+}
+
+.footer-link {
+    text-decoration: none;
+}
