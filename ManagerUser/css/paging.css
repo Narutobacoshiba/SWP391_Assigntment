@@ -1,0 +1,16 @@
+.pag {
+    display: inline-block;         
+}
+.pag a {
+    color: black;
+    font-size: 25px;
+    padding: 3px 9px;
+    text-decoration: none;          
+}
+.pag a.active{
+    background-color: black;
+    color: white;
+}
+.pag a:hover:not(.active){
+    background-color: chocolate;
+}       
