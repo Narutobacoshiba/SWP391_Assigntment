@@ -1,0 +1,226 @@
+.navbar .dropdown-toggle::after {
+    border: none;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    margin-right: 30px;
+    padding: 25px 0;
+    color: #FFFFFF;
+    font-size: 15px;
+    text-transform: uppercase;
+    outline: none;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active {
+    color: var(--primary);
+}
+
+@media (max-width: 991.98px) {
+    .navbar-light .navbar-nav .nav-link  {
+        margin-right: 0;
+        padding: 10px 0;
+    }
+
+    .navbar-light .navbar-nav {
+        border-top: 1px solid #EEEEEE;
+    }
+}
+
+.navbar-light .navbar-brand,
+.navbar-light a.btn {
+    height: 75px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: var(--dark);
+    font-weight: 500;
+}
+
+.navbar-light.sticky-top {
+    top: -100px;
+    transition: .5s;
+}
+
+@media (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu {
+        display: block;
+        margin-top: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: .5s;
+    }
+
+    .navbar .dropdown-menu.fade-down {
+        top: 100%;
+        transform: rotateX(-75deg);
+        transform-origin: 0% 0%;
+    }
+
+    .navbar .nav-item:hover .dropdown-menu {
+        top: 100%;
+        transform: rotateX(0deg);
+        visibility: visible;
+        transition: .5s;
+        opacity: 1;
+    }
+}
+
+.navar-user {
+    list-style: none;
+    position: relative;
+    width: 220px;
+    padding: 20px 0;
+    margin: unset;
+    cursor: pointer;
+}
+.navbar__img-user{
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border: 0px solid #E1E1E1;
+    border-radius: 50%;
+    background-color: #3BAFDA;
+}
+
+.navbar__user-name {
+    letter-spacing: 0;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+    max-width: 120px;
+    color: #333;
+    margin-right: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.navbar__user-list {
+    background-color: #FFFFFF;
+    width: 198px;
+    position: absolute;
+    top: 100%;
+    right: 0px;
+    padding-left: 0;
+    border-radius: 2px;
+    border: 1px solid #d3d3d3;
+    transform-origin: calc(100% - 20px) top;
+    animation: notifyGrowup ease-in 0.2s;
+    will-change: opacity, transform;
+    display: none;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.navbar__user-item {
+    list-style: none;
+    padding: 10px 12px;
+    font-weight: 300;
+    
+}
+
+.navbar__user-item a {
+    text-decoration: none;
+    color: #000;
+}
+
+.navbar__item--has-user-login:hover .navbar__user-list {
+    display: block;
+}
+
+.navbar__user-item:hover{
+    background-color: #f7f7f7;
+}
+
+.navbar__user-item--separate {
+    border-top: 1px solid #d3d3d3;
+}
+
+
+.navbar__user-list::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    top: -15%;
+    right: 0;
+}
+
+.category {
+    margin-right: 10px;
+}
+
+.category-img {
+    width: 80px;
+    height: 80px;
+}
+
+.category-heading {
+    padding: 24px;
+}
+
+.course-text__title,
+.course-text__desc {
+    margin: unset;
+}
+
+.course-text__desc {
+    color: rgb(99, 99, 99);
+    letter-spacing: 0px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    overflow-wrap: break-word;  
+    word-wrap: break-word; 
+    word-break: break-word;
+    width: 200px;
+}
+
+.course-text__title {
+    color: rgb(31, 31, 31);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.1px;
+    overflow-wrap: break-word;  
+    word-wrap: break-word; 
+    word-break: break-word;
+    width: 200px;
+}
+
+.course-detail__list,
+.course-detail__heading,
+.course-detail__items,
+.course-detail__desc,
+.course-detail__type {
+    margin: unset;
+    
+}
+
+.course-list {
+    margin-top: 14px;
+}
+
+.course-detail__heading {
+    font-size: 1rem;
+    background-color: #E0E0E0;
+    line-height: 1.5rem;
+    padding: 8px 20px;
+}
+
+.course-detail__items {
+    list-style-type: none;
+}
+
+.course-detail__list {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+}
