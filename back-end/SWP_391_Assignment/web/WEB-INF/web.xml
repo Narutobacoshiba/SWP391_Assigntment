@@ -16,6 +16,14 @@
         <servlet-name>DeleteUser</servlet-name>
         <servlet-class>UserAccount.DeleteUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetListBlog</servlet-name>
+        <servlet-class>Blog.GetListBlog</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetBlogById</servlet-name>
+        <servlet-class>Blog.GetBlogById</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetUser</servlet-name>
         <url-pattern>/user/get</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>DeleteUser</servlet-name>
         <url-pattern>/user/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetListBlog</servlet-name>
+        <url-pattern>/blog/getListBlog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetBlogById</servlet-name>
+        <url-pattern>/blog/getBlogById</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

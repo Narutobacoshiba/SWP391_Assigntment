@@ -9,17 +9,25 @@ package model;
  * @author hapha
  */
 public class UserAccount {
-    private String username;
+    private String id;
+    private String email;
     private String password;
-    private String dob;
-    private String address;
+    private String role;
 
-    public String getUsername() {
-        return username;
+    public String getId() {
+        return id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -30,21 +38,11 @@ public class UserAccount {
         this.password = password;
     }
 
-    public String getDob() {
-        return dob;
+    public String getRole() {
+        return role;
     }
 
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    
-    
+    public void setRole(String role) {
+        this.role = role;
+    }  
 }

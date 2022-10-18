@@ -21,8 +21,9 @@ public class UserAccountContext extends DBContext {
         UserAccount user = new UserAccount();
    
         try {
-            String sql = "SELECT [username], [password], [dob], [address] FROM UserAccount\n" +
-                         "WHERE [username] = ? and [password] = ?";
+            String sql = "SELECT a.AccountID as id, a.Email as email, r.[Name] as role  FROM\n" +
+                         "Account a INNER JOIN [Role] r ON a.RoleID = r.RoleID\n" +
+                         "WHERE a.Email = ? and a.[Password] = ?;";
              
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, username);
@@ -31,10 +32,9 @@ public class UserAccountContext extends DBContext {
             ResultSet rs = stm.executeQuery();
           
             while (rs.next()) {
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
-                user.setDob(rs.getString("dob"));
-                user.setAddress(rs.getString("address"));
+                user.setId(rs.getString("id"));
+                user.setEmail(rs.getString("email"));
+                user.setRole(rs.getString("role"));
 
                 return user;
             }
@@ -65,8 +65,10 @@ public class UserAccountContext extends DBContext {
         return false;
     }
     
+    
     public UserAccount updateUser(String username, String password, String dob, String address){
         UserAccount user = new UserAccount();
+        /*
         try {
             String sql_update = "UPDATE UserAccount\n" +
                                 "SET password = ?, [dob] = ?, [address] = ?\n" +
@@ -102,7 +104,7 @@ public class UserAccountContext extends DBContext {
             
         } catch (SQLException ex) {
             Logger.getLogger(UserAccountContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         return user;
     }
     

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package UserAccount;
+package Blog;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,21 +11,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import static java.lang.System.out;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.io.BufferedReader;
-
-import jwt.JwtAuthorization;
-import dal.UserAccountContext;
-import re.GetUserRequest;
-import model.UserAccount;
+import dal.BlogContext;
 /**
  *
  * @author hapha
  */
-public class GetUser extends HttpServlet {
+public class GetListBlog extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -42,10 +35,10 @@ public class GetUser extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet GetUser</title>");  
+            out.println("<title>Servlet GetListBlog</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet GetUser at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet GetListBlog at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,41 +68,17 @@ public class GetUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        StringBuffer jb = new StringBuffer();
-        String line;
-        try {
-            BufferedReader reader = request.getReader();
-            while ((line = reader.readLine()) != null) {
-                jb.append(line);
-            }
-        } catch (Exception e) {
-            throw new IOException("Error reading JSON request string");
-        }
-
-        try {
-            Gson gson = new GsonBuilder().create();  
-            GetUserRequest user_request = gson.fromJson(jb.toString(), GetUserRequest.class);  
+        Gson gson = new GsonBuilder().create();
+        BlogContext bc = new BlogContext();
+        String res = gson.toJson(bc.getListBlog());
             
-            String user_response = "";
-            String jwt = "";
-            
-            UserAccountContext uac = new UserAccountContext();
-            UserAccount ua = uac.getUser(user_request.getUsername(), user_request.getPassword());
-            if(ua.getId()!= null){
-                user_response = gson.toJson(ua);
-                jwt = JwtAuthorization.createJWT(ua.getId(), "", ua.getRole());
-            }
-            
-            PrintWriter out_pr = response.getWriter();
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            out_pr.print("{\"user\":"+user_response+", \"token\":\""+jwt+"\"}");
-            out_pr.flush();
-        } catch (Exception e) {
-            throw new IOException("Error parsing JSON request string");
-        }
+        PrintWriter out_pr = response.getWriter();
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        out_pr.print(res);
+        out_pr.flush();
     }
 
     /** 
