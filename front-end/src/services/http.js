@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { AuthService } from '@/services/auth.js'
 import { API_URL } from '../.env'
 
 export class Http {
@@ -12,8 +13,22 @@ export class Http {
 
   init () {
     if (this.isAuth) {
-        // use some authentication mechanic
-        return this.instance
+      this.instance.interceptors.request.use(request => {
+        request.headers.authorization = AuthService.getBearer()
+        // Nếu access token hết hạn và refreshToken tồn tại >> tới API và lấy access token mới
+        if (AuthService.getBearer() == '' || (AuthService.isAccessTokenExpired() && AuthService.hasRefreshToken())) {
+          return AuthService.debounceRefreshTokens()
+            .then(response => {
+              AuthService.setBearer(response.data.accessToken)
+              request.headers.authorization = AuthService.getBearer()
+              return request
+            }).catch(error => Promise.reject(error))
+        } else {
+          return request
+        }
+      }, error => {
+        return Promise.reject(error)
+      })
     }
 
     return this.instance

@@ -22,4 +22,23 @@ export class BlogServices extends BaseService {
           throw new ErrorWrapper(error)
         }
     }
+
+    static async deleteBlogById(id){
+        try {
+            const response = await this.request({ auth: true }).post(`SWP_391_Assignment/${this.entity}/deleteBlogById`, {"id":id})
+            return new ResponseWrapper(response, response.data)
+          } catch (error) {
+            throw new ErrorWrapper(error)
+          }
+    }
+
+    static async updateBlogById(id, title, description, content, url){
+        try {
+            const response = await this.request({ auth: true }).post(`SWP_391_Assignment/${this.entity}/updateBlogById`,
+             {"id":id,"title":title,"description":description,"content":content,"url":url})
+            return new ResponseWrapper(response, response.data)
+          } catch (error) {
+            throw new ErrorWrapper(error)
+          }
+    }
 }

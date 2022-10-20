@@ -1,150 +1,91 @@
 <template>
 <div>
-    <div class="container">
+    <div class="container course-content">
     <div class="row">
       <div class="col-2">
+        <div v-if="getRole == 'admin'">
+            <h3>Status</h3>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" value="2" v-model="courseStatus" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+                All
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" value="1" v-model="courseStatus" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+                Accepted
+            </label>
+            </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" value="0" v-model="courseStatus" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+                Pending
+            </label>
+            </div>
+        </div>
         <h3>Category</h3>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
           <label class="form-check-label" for="defaultCheck1">
-            Category1
+            Java
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
           <label class="form-check-label" for="defaultCheck1">
-            Category1
+            C/C++
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
           <label class="form-check-label" for="defaultCheck1">
-            Category1
+            Python
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
           <label class="form-check-label" for="defaultCheck1">
-            Category1
+            Golang
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
           <label class="form-check-label" for="defaultCheck1">
-            Category1
+            C#
           </label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
           <label class="form-check-label" for="defaultCheck1">
-            Category1
-          </label>
-        </div>
-
-        <h3>Featured</h3>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-          <label class="form-check-label" for="defaultCheck1">
-            Featured
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-          <label class="form-check-label" for="defaultCheck1">
-            Not Featured
-          </label>
-        </div>
-        
-        <h3>Author</h3>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-          <label class="form-check-label" for="defaultCheck1">
-            Author
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-          <label class="form-check-label" for="defaultCheck1">
-            Author
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-          <label class="form-check-label" for="defaultCheck1">
-            Author
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-          <label class="form-check-label" for="defaultCheck1">
-            Author
+            PHP
           </label>
         </div>
       </div>
       <div class="col-10">
         <div class="course-list">
-          <div class="course-items">
-            <img src="../../assets/img/python.png" alt="" class="course-img">
-            <div class="course-text">
-              <h5 class="course-text__title">Python For Everybody</h5>
-              <p class="course-text__desc">This collection contains all the courses of the specialization: Python for everybody</p>
-              <p class="course-text__author">Dang Cong Kien</p>
-              <p class="course-text__lession">5 lessions</p>
-              <p class="course-text__featured">Featured</p>
-              <h5 class="course-text__price">$30</h5>
-            </div>
-          </div>
 
-          <div class="course-items">
-            <img src="../../assets/img/python.png" alt="" class="course-img">
+          <div class="course-items" v-for="course in GetListCourse" :key="course.courseID">
+            <img :src="course.thumbnailUrl" alt="" class="course-img">
             <div class="course-text">
-              <h5 class="course-text__title">Python For Everybody</h5>
-              <p class="course-text__desc">This collection contains all the courses of the specialization: Python for everybody</p>
+              <a href="" @click="showCourseDetail(course.courseID)"><h5 class="course-text__title">{{course.name}}</h5></a>
+              <p class="course-text__desc">{{course.description}}</p>
               <p class="course-text__author">Dang Cong Kien</p>
               <p class="course-text__lession">5 lessions</p>
-              <p class="course-text__featured">Featured</p>
-              <h5 class="course-text__price">$30</h5>
+              <div class="price-and-button" v-if="getRole == 'admin'">
+                <p class="course-text__featured">Featured</p>
+                <div class="course-btn" v-if="course.status == 0">
+                  <div class="btn btn-success btn-sm" @click="changeCourseStatus(course.courseID,1)">Accept</div>
+                  <div class="btn btn-danger btn-sm" @click="removeCourse(course.courseID)">Reject</div>
+                </div>
+                <div class="course-btn" v-if="course.status == 1">
+                  <div class="btn btn-success btn-sm" @click="changeCourseStatus(course.courseID,0)">Pending</div>
+                  <div class="btn btn-danger btn-sm" @click="removeCourse(course.courseID)">Remove</div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="course-items">
-            <img src="../../assets/img/python.png" alt="" class="course-img">
-            <div class="course-text">
-              <h5 class="course-text__title">Python For Everybody</h5>
-              <p class="course-text__desc">This collection contains all the courses of the specialization: Python for everybody</p>
-              <p class="course-text__author">Dang Cong Kien</p>
-              <p class="course-text__lession">5 lessions</p>
-              <p class="course-text__featured">Featured</p>
-              <h5 class="course-text__price">$30</h5>
-            </div>
-          </div>
-
-          <div class="course-items">
-            <img src="../../assets/img/python.png" alt="" class="course-img">
-            <div class="course-text">
-              <h5 class="course-text__title">Python For Everybody</h5>
-              <p class="course-text__desc">This collection contains all the courses of the specialization: Python for everybody</p>
-              <p class="course-text__author">Dang Cong Kien</p>
-              <p class="course-text__lession">5 lessions</p>
-              <p class="course-text__featured">Featured</p>
-              <h5 class="course-text__price">$30</h5>
-            </div>
-          </div>
-
-          <div class="course-items">
-            <img src="../../assets/img/python.png" alt="" class="course-img">
-            <div class="course-text">
-              <h5 class="course-text__title">Python For Everybody</h5>
-              <p class="course-text__desc">This collection contains all the courses of the specialization: Python for everybody</p>
-              <p class="course-text__author">Dang Cong Kien</p>
-              <p class="course-text__lession">5 lessions</p>
-              <p class="course-text__featured">Featured</p>
-              <h5 class="course-text__price">$30</h5>
-            </div>
-          </div>
-          
         </div>
-
       </div>
     </div>
   </div>
@@ -165,8 +106,85 @@
       </li>
     </ul>
   </nav>
-</div>
+  </div>
 </template>
+
+<script>
+import {CourseServices} from "../../services/course.services"
+
+export default ({
+    data() {
+        return{
+            courseStatus: 1,
+            courseList: [],
+        }
+    }, 
+    watch: {
+        courseStatus(newStatus) {
+           this.getListCourse(newStatus) 
+        }
+    },
+    mounted() {
+        if(this.$store.state.user.currentUser.role == 'admin'){
+            this.courseStatus = 2;
+        }
+        this.getListCourse();
+    },
+    computed: {
+        GetListCourse(){
+            return this.courseList
+        },
+        getRole(){
+            return this.$store.state.user.currentUser.role
+        }
+    },
+    methods: {
+        async getListCourse() {
+            let res = await CourseServices.getListCourse(this.courseStatus)
+            this.courseList = res.data
+        },
+        async changeCourseStatus(id, status){
+            let res = await CourseServices.updateCourseStatus(id, status)
+            if(res.data == true){
+                this.getListCourse();
+                this.$notify({
+                    group: 'foo',
+                    type: 'success ',
+                    text: 'Update successful'
+                });
+            }else{
+                this.$notify({
+                    group: 'foo',
+                    type: 'warn',
+                    text: 'update failed'
+                });
+            }
+        },
+        async removeCourse(id){
+            if(confirm("do you want to delete this course?")){
+                let res = await CourseServices.deleteCourseById(id)
+                if(res.data == true){
+                    this.getListCourse();
+                    this.$notify({
+                        group: 'foo',
+                        type: 'success ',
+                        text: 'Delete course successful'
+                    });
+                }else{
+                    this.$notify({
+                        group: 'foo',
+                        type: 'warn',
+                        text: 'Delete course failed'
+                    });
+                }
+            }
+        },
+        showCourseDetail(id){
+            this.$router.push({name: "CourseDetail", query: {"id": id} });
+        }
+   }
+})
+</script>
 
 <style>
 .navbar .dropdown-toggle::after {

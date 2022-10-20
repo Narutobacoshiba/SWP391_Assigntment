@@ -1,10 +1,9 @@
 export default {
   currentUser: {
     id: '',
-    username: '',
     role: '',
-    firstname: '',
-    lastname: '',
+    username: '',
     email: '',
+    status: 0,
   }
 }

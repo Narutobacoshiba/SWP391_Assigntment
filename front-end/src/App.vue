@@ -11,22 +11,28 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a @click="routing('/')" class="nav-item nav-link active">Home</a>
+                    <a v-if="getRole == 'admin'" @click="routing('/dashboard')" class="nav-item nav-link">DashBoard</a>
+                    <a v-if="getRole == 'admin'" @click="routing('/user')" class="nav-item nav-link">User</a>
                     <a @click="routing('/blog')" class="nav-item nav-link">Blog</a>
                     <a @click="routing('/courses')" class="nav-item nav-link">Courses</a>
-                    <div class="nav-item dropdown">
+
+                    <!-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu fade-down m-0">
                             <a href="team.html" class="dropdown-item">Our Team</a>
                             <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                             <a href="404.html" class="dropdown-item">404 Page</a>
                         </div>
-                    </div>
+                    </div> -->
                     <a @click="routing('/contact')" class="nav-item nav-link">Contact</a>
+                    <a v-if="isLogin" @click="goProfile" class="nav-item nav-link">Profile</a>
                 </div>
-                <a @click="routing('/login')" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
+                <a v-if="isLogin" @click="doLogout" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Logout<i class="fa fa-arrow-left ms-3"></i></a>
+                <a v-else @click="routing('/login')" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
             </div>
         </nav>
         <!-- Navbar End -->
+      <notifications group="foo" />
       <div class="content-body">
           <router-view />
       </div>
@@ -119,6 +125,8 @@
 </template>
 
 <script>
+import {AuthService} from "./services/auth"
+
 // @ is an alias to /src
 export default {
   data(){
@@ -132,6 +140,12 @@ export default {
         return false
       }
       return true
+    },
+    isLogin(){
+        return this.$store.state.user.currentUser.id
+    },
+    getRole(){
+        return this.$store.state.user.currentUser.role
     }
   },
   methods: {
@@ -139,6 +153,13 @@ export default {
       if(this.$route.path != url){
         this.$router.push(url)
       }
+    },
+    async doLogout(){
+        await AuthService.makeLogout()
+    },
+    goProfile(){
+        let id = this.$store.state.user.currentUser.id
+        this.$router.push({name: "UserProfile", query: {"id": id} });
     }
   }
 };

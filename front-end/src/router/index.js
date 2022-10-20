@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import { initCurrentUserStateMiddleware, checkAccessMiddleware, setPageTitleMiddleware } from './middlewares'
 
-//import { initCurrentUserStateMiddleware, checkAccessMiddleware, setPageTitleMiddleware } from './middlewares'
 import { routes } from './routes'
 
 Vue.use(VueRouter);
@@ -12,10 +12,9 @@ const router = new VueRouter({
   routes,
 });
 
-/*
 router.beforeEach(initCurrentUserStateMiddleware)
 router.beforeEach(checkAccessMiddleware)
 router.beforeEach(setPageTitleMiddleware)
-*/
+
 
 export default router;

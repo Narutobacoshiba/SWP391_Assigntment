@@ -1,6 +1,5 @@
 import $store from '../store'
 import { AuthService } from '@/services/auth.js'
-import cookie from 'vue-cookies'
 
 export async function initCurrentUserStateMiddleware (to, from, next) {
   const currentUserId = $store.state.user.currentUser.id

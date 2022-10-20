@@ -13,7 +13,7 @@
                   <form class="form-group">
                      <input v-model="emailLogin" type="email" class="form-control" placeholder="Email" required>
                      <input v-model="passwordLogin" type="password" class="form-control" placeholder="Password" required>
-                     <input type="submit" class="btn btn-primary" @click="doLogin">
+                     <div class="btn btn-primary" @click="doLogin" style="margin-bottom:10px;">Submit</div>
                      <p>Don't have an account? <a href="#" @click="registerActive = !registerActive, emptyFields = false">Sign up here</a>
                      </p>
                      <p><a href="#">Forgot your password?</a></p>
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import {UserServices} from "../services/user.services"
+import {AuthService} from "../services/auth"
 
 export default ({
     data() {
@@ -58,8 +58,14 @@ export default ({
          if (this.emailLogin === "" || this.passwordLogin === "") {
             this.emptyFields = true;
          } else {
-            let res = await UserServices.getUser(this.emailLogin, this.passwordLogin)
-            console.log(res)
+            try {
+               await AuthService.makeLogin({ username: this.emailLogin, password: this.passwordLogin })
+               this.error = ''
+               await this.$store.dispatch('user/getCurrent')
+               await this.$router.push('/')
+            } catch (error) {
+               console.log(error)
+            }
          }
       },
       
