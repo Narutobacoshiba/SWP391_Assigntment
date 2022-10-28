@@ -6,6 +6,7 @@ package jwt;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Date;    
+import static java.lang.System.out;
 /**
  *
  * @author hapha
@@ -49,10 +50,11 @@ public class JwtAuthorization {
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             jwtToken = bearerToken.substring(7, bearerToken.length());
+            
             Claims claims = Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(jwtToken).getBody();
-            if(claims.getExpiration() != null && claims.getExpiration().before(new Date())){
+            if(claims.getExpiration() != null && claims.getExpiration().after(new Date())){
                 return claims;
             }
         }

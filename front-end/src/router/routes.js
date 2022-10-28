@@ -3,6 +3,7 @@ import LoginPage from "../views/LoginPage.vue"
 import BlogPage from "../views/blog/BlogPage.vue"
 import BlogDetail from "../views/blog/BlogDetail.vue"
 import BlogEdit from "../views/blog/BlogEdit.vue"
+import BlogAdd from "../views/blog/BlogAdd.vue"
 import CourseList from "../views/course/CourseListPage.vue"
 import CourseDetail from "../views/course/CourseDetail.vue"
 import CourseRegister from "../views/course/CourseRegisterForUser.vue"
@@ -41,6 +42,12 @@ export const routes = [
     name: "BlogEdit",
     component: BlogEdit,
     meta: { requiresAuth: true, title: `blog-edit`},
+  },
+  {
+    path: "/blog-add",
+    name: "BlogAdd",
+    component: BlogAdd,
+    meta: { requiresAuth: true, title: `blog-add`},
   },
   {
     path: "/courses",

@@ -25,6 +25,7 @@
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class="section-title bg-white text-center text-primary px-3">Blog</h6>
                     <h1 class="mb-5">Latest Posts</h1>
+                    <div @click="addBlog" class="btn btn-primary" v-if="getRole == 'admin'" style="margin-bottom: 20px;">Add</div>
                 </div>
                 <div class="row g-4 justify-content-center">
                     <div v-for="blog in GetListBlog" :key="blog.id" class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -107,6 +108,9 @@ export default ({
       },
       showDetail(id){
         this.$router.push({name: "BlogDetail", query: {"id": id} });
+      },
+      addBlog(){
+        this.$router.push({name: "BlogAdd"});
       }
    }
 })

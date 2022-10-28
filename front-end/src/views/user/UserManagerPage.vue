@@ -8,6 +8,10 @@
                         <h2>User <b>Management</b></h2>
                     </div>
                     <div class="col-xs-7">
+                        <div class="input-group">
+                            <input v-model="searchText" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                            <div @click="searchUser" class="btn btn-outline-primary">search</div>
+                        </div>
                         <a href="#" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Add New User</span></a>
                         <a href="#" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>						
                     </div>
@@ -64,6 +68,7 @@ export default ({
     data() {
         return{
             userList: [],
+            searchText: ""
         }
     }, 
     mounted() {
@@ -115,6 +120,10 @@ export default ({
         },
         showUserDetail(id){
             this.$router.push({name: "UserProfile", query: {"id": id} });
+        },
+        async searchUser(){
+            let res = await UserServices.searchUser(this.searchText)
+            this.userList = res.data
         }
    }
 })
@@ -273,5 +282,9 @@ export default ({
     }
 .action-btn{
 	cursor: pointer;
+}
+
+.input-group{
+    width: 300px;
 }
 </style>

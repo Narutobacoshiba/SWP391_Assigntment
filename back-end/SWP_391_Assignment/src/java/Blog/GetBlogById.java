@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import dal.BlogContext;
 import re.GetBlogByIdRequest;
+import model.BlogDetail;
 
 /**
  *
@@ -88,7 +89,10 @@ public class GetBlogById extends HttpServlet {
             
             
             BlogContext bc = new BlogContext();
-            String res = gson.toJson(bc.getBlogById(user_request.getId()));
+            BlogDetail bd = bc.getBlogById(user_request.getId());
+            bc.updateBlogViewById(bd.getId(), bd.getNumberOfView() + 1);
+            String res = gson.toJson(bd);
+            
             
             PrintWriter out_pr = response.getWriter();
             response.setHeader("Access-Control-Allow-Origin", "*");

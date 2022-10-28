@@ -14,6 +14,18 @@ export class BlogServices extends BaseService {
         }
     }
 
+    static async addBlog(blogTitle, blogDescription, blogContent, thumbnailUrl) {
+      try {
+        const response = await this.request({ auth: false }).post(`SWP_391_Assignment/${this.entity}/addBlog`, {
+          "blogTitle":blogTitle, "blogDescription":blogDescription, "blogContent":blogContent, "thumbnailUrl":thumbnailUrl
+        })
+        return new ResponseWrapper(response, response.data)
+      } catch (error) {
+        throw new ErrorWrapper(error)
+      }
+  }
+
+
     static async getBlogById(id) {
         try {
           const response = await this.request({ auth: false }).post(`SWP_391_Assignment/${this.entity}/getBlogById`, {"id":id})

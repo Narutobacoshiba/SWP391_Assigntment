@@ -71,4 +71,80 @@ public class BlogContext extends DBContext {
         
         return blog;
     }
+    
+    public Boolean addBlog(String blogTitle, String blogDescription, String blogContent, String thumnailUrl){
+        try {
+            String sql = "INSERT INTO Blog (Title, [Description], Content, CreatedDate,\n" + 
+                         "AuthorID, Display, ThumbnailUrl, NumberOfView)\n" +
+                         "VALUES (?,?,?,GETDATE(),6,1,?,0)";
+             
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, blogTitle);
+            stm.setString(2, blogDescription);
+            stm.setString(3, blogContent);
+            stm.setString(4, thumnailUrl);
+            
+            stm.executeUpdate();
+          
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserAccountContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+    
+    public boolean deleteBlogById(int id){
+        try {
+            String sql_insert = "DELETE FROM Blog\n" +
+                                "WHERE BlogID = ?\n";
+            PreparedStatement stm = connection.prepareStatement(sql_insert);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+      
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserAccountContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+    
+    public boolean updateBlogById(int id, String title, String description, String content, String url){
+        try {
+            String sql_update = "UPDATE Blog\n" +
+                                "SET Title = ?, [Description] = ?, Content = ?,\n" +
+                                "ThumbnailUrl = ?, CreatedDate = GETDATE()\n" +
+                                "WHERE BlogID = ?\n";
+            PreparedStatement stm = connection.prepareStatement(sql_update);
+            stm.setString(1, title);
+            stm.setString(2, description);
+            stm.setString(3, content);
+            stm.setString(4, url);
+            stm.setInt(5, id);
+            stm.executeUpdate();
+            
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserAccountContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean updateBlogViewById(int id, int view){
+        try {
+            String sql_update = "UPDATE Blog\n" +
+                                "SET NumberOfView = ?\n" +
+                                "WHERE BlogID = ?\n";
+            PreparedStatement stm = connection.prepareStatement(sql_update);
+            stm.setInt(1, view);
+            stm.setInt(2, id);
+            stm.executeUpdate();
+            
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserAccountContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

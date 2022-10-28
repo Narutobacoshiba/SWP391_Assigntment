@@ -95,9 +95,9 @@ public class GetUser extends HttpServlet {
             
             UserAccountContext uac = new UserAccountContext();
             UserAccount ua = uac.getUser(user_request.getUsername(), user_request.getPassword());
-            if(ua.getId()!= null){
+            if(ua.getId() != 0){
                 user_response = gson.toJson(ua);
-                jwt = JwtAuthorization.createJWT(ua.getId(), "", ua.getRole());
+                jwt = JwtAuthorization.createJWT(Integer.toString(ua.getId()), "", ua.getRole());
             }
             
             PrintWriter out_pr = response.getWriter();
@@ -105,7 +105,7 @@ public class GetUser extends HttpServlet {
             response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            out_pr.print("{\"user\":"+user_response+", \"token\":\""+jwt+"\"}");
+            out_pr.print("{\"user\":"+user_response+", \"accessToken\":\""+jwt+"\"}");
             out_pr.flush();
         } catch (Exception e) {
             throw new IOException("Error parsing JSON request string");

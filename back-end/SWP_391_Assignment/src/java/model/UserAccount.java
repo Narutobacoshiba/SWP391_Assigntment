@@ -9,16 +9,35 @@ package model;
  * @author hapha
  */
 public class UserAccount {
-    private String id;
+    private int id;
     private String email;
+    private String username;
     private String password;
     private String role;
+    private int status;
 
-    public String getId() {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

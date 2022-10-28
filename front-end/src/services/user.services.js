@@ -105,4 +105,13 @@ export class UserServices extends BaseService {
         throw new ErrorWrapper(error)
       }
     }
+
+    static async searchUser(text){
+      try {
+        const response = await this.request({ auth: false }).post(`SWP_391_Assignment/${this.entity}/searchUser`, {"text":text})
+        return new ResponseWrapper(response, response.data)
+      } catch(error){
+        throw new ErrorWrapper(error)
+      }
+    }
 }
