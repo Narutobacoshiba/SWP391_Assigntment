@@ -9,19 +9,26 @@ package model;
  * @author Son
  */
 public class Achivement {
+
     private int AchivementId;
     private int CetificateId;
     private String CompleteDate;
     private int AccountId;
+    private String CetificateImage;
+    private String CetificateName;
+    private String DesCription;
 
     public Achivement() {
     }
 
-    public Achivement(int AchivementId, int CetificateId, String CompleteDate, int AccountId) {
+    public Achivement(int AchivementId, int CetificateId, String CompleteDate, int AccountId, String CetificateImage, String CetificateName, String DesCription) {
         this.AchivementId = AchivementId;
         this.CetificateId = CetificateId;
         this.CompleteDate = CompleteDate;
         this.AccountId = AccountId;
+        this.CetificateImage = CetificateImage;
+        this.CetificateName = CetificateName;
+        this.DesCription = DesCription;
     }
 
     public int getAchivementId() {
@@ -56,10 +63,35 @@ public class Achivement {
         this.AccountId = AccountId;
     }
 
+    public String getCetificateImage() {
+        return CetificateImage;
+    }
+
+    public void setCetificateImage(String CetificateImage) {
+        this.CetificateImage = CetificateImage;
+    }
+
+    public String getCetificateName() {
+        return CetificateName;
+    }
+
+    public void setCetificateName(String CetificateName) {
+        this.CetificateName = CetificateName;
+    }
+
+    public String getDesCription() {
+        return DesCription;
+    }
+
+    public void setDesCription(String DesCription) {
+        this.DesCription = DesCription;
+    }
+
     @Override
     public String toString() {
-        return "Achivement{" + "AchivementId=" + AchivementId + ", CetificateId=" + CetificateId + ", CompleteDate=" + CompleteDate + ", AccountId=" + AccountId + '}';
+        return "Achivement{" + "AchivementId=" + AchivementId + ", CetificateId=" + CetificateId + ", CompleteDate=" + CompleteDate + ", AccountId=" + AccountId + ", CetificateImage=" + CetificateImage + ", CetificateName=" + CetificateName + ", DesCription=" + DesCription + '}';
     }
-    
-    
+
+   
+  
 }
