@@ -12,15 +12,17 @@ public class Cetificate {
     private int CetificateId;
     private String CetificateName;
     private String Description;
+    private String CetificateImage;
     private int CourseId;
 
     public Cetificate() {
     }
 
-    public Cetificate(int CetificateId, String CetificateName, String Description, int CourseId) {
+    public Cetificate(int CetificateId, String CetificateName, String Description, String CetificateImage, int CourseId) {
         this.CetificateId = CetificateId;
         this.CetificateName = CetificateName;
         this.Description = Description;
+        this.CetificateImage = CetificateImage;
         this.CourseId = CourseId;
     }
 
@@ -48,6 +50,14 @@ public class Cetificate {
         this.Description = Description;
     }
 
+    public String getCetificateImage() {
+        return CetificateImage;
+    }
+
+    public void setCetificateImage(String CetificateImage) {
+        this.CetificateImage = CetificateImage;
+    }
+
     public int getCourseId() {
         return CourseId;
     }
@@ -58,8 +68,10 @@ public class Cetificate {
 
     @Override
     public String toString() {
-        return "Cetificate{" + "CetificateId=" + CetificateId + ", CetificateName=" + CetificateName + ", Description=" + Description + ", CourseId=" + CourseId + '}';
+        return "Cetificate{" + "CetificateId=" + CetificateId + ", CetificateName=" + CetificateName + ", Description=" + Description + ", CetificateImage=" + CetificateImage + ", CourseId=" + CourseId + '}';
     }
+
+    
 
    
     

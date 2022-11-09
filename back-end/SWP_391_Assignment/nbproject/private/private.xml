@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Son/Downloads/SWP391_Assigntment-master%20(3)/SWP391_Assigntment-master/back-end/SWP_391_Assignment/src/java/dal/CourseContext.java</file>
-            <file>file:/C:/Users/Son/Downloads/SWP391_Assigntment-master%20(3)/SWP391_Assigntment-master/back-end/SWP_391_Assignment/src/java/dal/AchivementContext.java</file>
-            <file>file:/C:/Users/Son/Downloads/SWP391_Assigntment-master%20(3)/SWP391_Assigntment-master/back-end/SWP_391_Assignment/src/java/dal/UserAccountContext.java</file>
             <file>file:/C:/Users/Son/Downloads/SWP391_Assigntment-master%20(3)/SWP391_Assigntment-master/back-end/SWP_391_Assignment/src/java/model/Cetificate.java</file>
-            <file>file:/C:/Users/Son/Downloads/SWP391_Assigntment-master%20(3)/SWP391_Assigntment-master/back-end/SWP_391_Assignment/src/java/model/CourseDetail.java</file>
-            <file>file:/C:/Users/Son/Downloads/SWP391_Assigntment-master%20(3)/SWP391_Assigntment-master/back-end/SWP_391_Assignment/src/java/model/Achivement.java</file>
+            <file>file:/C:/Users/Son/Downloads/SWP391_Assigntment-master%20(3)/SWP391_Assigntment-master/back-end/SWP_391_Assignment/src/java/dal/BlogContext.java</file>
+            <file>file:/C:/Users/Son/Downloads/SWP391_Assigntment-master%20(3)/SWP391_Assigntment-master/back-end/SWP_391_Assignment/src/java/dal/CetificateContext.java</file>
         </group>
     </open-files>
 </project-private>
