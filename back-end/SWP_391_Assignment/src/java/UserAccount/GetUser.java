@@ -7,18 +7,20 @@ package UserAccount;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import static java.lang.System.out;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.BufferedReader;
 
+import jwt.JwtAuthorization;
 import dal.UserAccountContext;
 import re.GetUserRequest;
+import model.UserAccount;
 /**
  *
  * @author hapha
@@ -87,16 +89,23 @@ public class GetUser extends HttpServlet {
         try {
             Gson gson = new GsonBuilder().create();  
             GetUserRequest user_request = gson.fromJson(jb.toString(), GetUserRequest.class);  
-
+            
+            String user_response = "";
+            String jwt = "";
+            
             UserAccountContext uac = new UserAccountContext();
-            String user_response = gson.toJson(uac.getUser(user_request.getUsername(), user_request.getPassword()));
+            UserAccount ua = uac.getUser(user_request.getUsername(), user_request.getPassword());
+            if(ua.getId() != 0){
+                user_response = gson.toJson(ua);
+                jwt = JwtAuthorization.createJWT(Integer.toString(ua.getId()), "", ua.getRole());
+            }
             
             PrintWriter out_pr = response.getWriter();
             response.setHeader("Access-Control-Allow-Origin", "*");
             response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            out_pr.print(user_response);
+            out_pr.print("{\"user\":"+user_response+", \"accessToken\":\""+jwt+"\"}");
             out_pr.flush();
         } catch (Exception e) {
             throw new IOException("Error parsing JSON request string");
